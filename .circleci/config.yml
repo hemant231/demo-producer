@@ -22,9 +22,6 @@ jobs:
    
    steps:
      - checkout
-     - run:
-         name: pip-install
-         command: sudo apt-get install -y python3-pip
      # Download and cache dependencies
      - restore_cache:
          keys:
