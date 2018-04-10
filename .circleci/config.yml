@@ -26,6 +26,9 @@ jobs:
          name: pip-install
          command: sudo apt-get install -y python3-pip
      - run:
+         name: pip-install-python-dev gcc
+         command: sudo apt-get install -y python-dev gcc
+     - run:
          name: pip-install-coverage
          command: sudo apt-get install -y coverage
      # Download and cache dependencies
