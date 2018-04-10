@@ -36,6 +36,15 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run:
+         name: test-coverage
+         command: npm run test-coverage
+      - store_artifacts:
+         path: coverage
+         prefix: coverage
+      - run:
+         name: upload-coverage
+         command: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_KEY}
           
       # run tests!
       - run: mvn integration-test
