@@ -39,16 +39,3 @@ jobs:
        - run: 
           name: Running Test
           command: mvn integration-test
-       - store_artifacts:
-         path: coverage
-         prefix: coverage
-       - run:
-         name: upload-coverage
-         command: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_KEY}
-
-       - run:
-         name: build
-         command: mvn install
-          
-      # run tests!
-     
