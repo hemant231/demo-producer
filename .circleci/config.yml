@@ -37,10 +37,10 @@ jobs:
       # run tests!
      - run: mvn integration-test
      - store_artifacts:
-         path: /code/test-coverage
+         path: .
          destination: prefix
      - store_test_results:
-         path: test-coverage
+         path: .
      - run:
         name: upload-coverage
         command: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_KEY}
