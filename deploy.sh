@@ -16,7 +16,7 @@ deploy_cluster() {
 
     make_task_def
     register_definition
-    if [[ $(aws ecs update-service --cluster sample-webapp-cluster --service sample-webapp-service --task-definition $revision | \
+    if [[ $(aws ecs update-service --cluster yyyyello-team-cluster --service yyyyello-team-service --task-definition $revision | \
                    $JQ '.service.taskDefinition') != $revision ]]; then
         echo "Error updating service."
         return 1
@@ -25,7 +25,7 @@ deploy_cluster() {
     # wait for older revisions to disappear
     # not really necessary, but nice for demos
     for attempt in {1..30}; do
-        if stale=$(aws ecs describe-services --cluster sample-webapp-cluster --services sample-webapp-service | \
+        if stale=$(aws ecs describe-services --cluster yyyyello-team-cluster --services yyyyello-team-service | \
                        $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
             echo "Waiting for stale deployments:"
             echo "$stale"
@@ -42,15 +42,15 @@ deploy_cluster() {
 make_task_def(){
 	task_template='[
 		{
-			"name": "go-sample-webapp",
-			"image": "%s.dkr.ecr.us-east-1.amazonaws.com/go-sample-webapp:%s",
+			"name": "yyyyello-team",
+			"image": "%s.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:%s",
 			"essential": true,
 			"memory": 200,
 			"cpu": 10,
 			"portMappings": [
 				{
 					"containerPort": 8080,
-					"hostPort": 80
+					"hostPort": 8080
 				}
 			]
 		}
@@ -60,8 +60,8 @@ make_task_def(){
 }
 
 push_ecr_image(){
-	eval $(aws ecr get-login --region us-east-1 --no-include-email)
-	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/go-sample-webapp:$CIRCLE_SHA1
+	eval $(aws ecr get-login --region us-east-2 --no-include-email)
+	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:$CIRCLE_SHA1
 }
 
 register_definition() {
