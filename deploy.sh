@@ -37,7 +37,7 @@ echo $REVISION
     DESIRED_COUNT="1"
    fi
    sleep 20
-   aws ecs update-service --cluster test-cluster --region us-east-2 --service test-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT} --force-new-deployment
+   aws ecs update-service --cluster test-cluster --region us-east-2 --service test-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
  else
    echo "entered new service"
    aws ecs create-service --service-name test-service --desired-count 1 --task-definition ${family} --cluster test-cluster --region us-east-2
