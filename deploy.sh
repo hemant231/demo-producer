@@ -24,7 +24,7 @@ deploy_cluster() {
     
     echo deploy_cluster_function 3
     
-    if [[ $(aws ecs update-service --cluster yyyyello-team-cluster --service yyyyello-team-service --task-definition $revision | \
+    if [[ $(aws ecs update-service --cluster test-cluster --service test-service --task-definition $revision | \
                    $JQ '.service.taskDefinition') != $revision ]]; then
         echo "Error updating service."
         return 1
@@ -33,7 +33,7 @@ deploy_cluster() {
     # wait for older revisions to disappear
     # not really necessary, but nice for demos
     for attempt in {1..30}; do
-        if stale=$(aws ecs describe-services --cluster yyyyello-team-cluster --services yyyyello-team-service | \
+        if stale=$(aws ecs describe-services --cluster test-cluster --services test-service | \
                        $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
             echo "Waiting for stale deployments:"
             echo "$stale"
@@ -50,8 +50,8 @@ deploy_cluster() {
 make_task_def(){
 	task_template='[
 		{
-			"name": "yyyyello-team",
-			"image": "%s.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:%s",
+			"name": "yello-team",
+			"image": "%s.dkr.ecr.us-east-2.amazonaws.com/yello-team:%s",
 			"essential": true,
 			"memory": 200,
 			"cpu": 10,
@@ -70,7 +70,7 @@ make_task_def(){
 push_ecr_image(){
 	echo deploy_cluster_function
 	eval $(aws ecr get-login --region us-east-2)
-	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:$CIRCLE_SHA1
+	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1
 }
 
 register_definition() {
