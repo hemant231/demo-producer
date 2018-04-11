@@ -9,6 +9,7 @@ dependencies:
 test:
   post:
     - docker run -d -p 8080:8080 --name yyyyello-team 463442625423.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:$CIRCLE_SHA1; sleep 10
+    - chmod +x ./deploy.sh
    
 
 deployment:
