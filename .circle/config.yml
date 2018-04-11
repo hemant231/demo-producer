@@ -23,9 +23,10 @@ jobs:
          # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-        - run: mvn integration-test
-
-        - run: mvn install
+        - run:
+            name: "Maven Install"
+            command: mvn install
+            
   deploy:
     docker:
       - image: 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team
