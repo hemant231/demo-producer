@@ -11,7 +11,7 @@ configure_aws_cli(){
 }
 
 deploy_cluster() {
-
+    echo deploy_cluster_function
     family="sample-webapp-task-family"
 
     make_task_def
@@ -60,6 +60,7 @@ make_task_def(){
 }
 
 push_ecr_image(){
+	echo deploy_cluster_function
 	eval $(aws ecr get-login --region us-east-2 --no-include-email)
 	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:$CIRCLE_SHA1
 }
