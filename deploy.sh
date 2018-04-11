@@ -12,7 +12,7 @@ configure_aws_cli(){
 
 deploy_cluster() {
     echo deploy_cluster_function
-    family="sample-webapp-task-family"
+    family="test-def"
     
     echo deploy_cluster_function 1
     
