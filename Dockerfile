@@ -8,4 +8,4 @@ WORKDIR /var/www
 
 EXPOSE $PORT
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","yello-ms-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","demo-producer-0.0.1-SNAPSHOT.jar"]
