@@ -13,9 +13,17 @@ configure_aws_cli(){
 deploy_cluster() {
     echo deploy_cluster_function
     family="sample-webapp-task-family"
-
+    
+    echo deploy_cluster_function 1
+    
     make_task_def
+    
+    echo deploy_cluster_function 2
+    
     register_definition
+    
+    echo deploy_cluster_function 3
+    
     if [[ $(aws ecs update-service --cluster yyyyello-team-cluster --service yyyyello-team-service --task-definition $revision | \
                    $JQ '.service.taskDefinition') != $revision ]]; then
         echo "Error updating service."
