@@ -1,6 +1,7 @@
-FROM ubuntu:14.04
+FROM java:8
 
-COPY ./go-ecs-ecr /opt/
 EXPOSE 8080
 
-ENTRYPOINT ["/opt/go-ecs-ecr"]
+ADD target/demo-producer-0.0.1-SNAPSHOT.jar demo-producer-0.0.1-SNAPSHOT.jar
+
+ENTRYPOINT ["java","-jar","demo-producer-0.0.1-SNAPSHOT.jar","--server.port=8080"] 
