@@ -4,8 +4,9 @@
 JQ="jq --raw-output --exit-status"
 
 configure_aws_cli(){
+	echo configure_aws_cli
 	aws --version
-	aws configure set default.region us-east-1
+	aws configure set default.region us-east-2
 	aws configure set default.output json
 }
 
