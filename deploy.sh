@@ -12,7 +12,7 @@ configure_aws_cli(){
 
 deploy_cluster() {
     echo deploy_cluster_function
-    family="test-def"
+    family="test-def-3"
     
     echo deploy_cluster_function 1
     
