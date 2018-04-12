@@ -6,6 +6,8 @@ dependencies:
   post:
     - mvn install
     - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1 .
+    - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team:latest .
+
 
 test:
   post:
