@@ -4,6 +4,7 @@ machine:
 
 dependencies:
   post:
+    - mvn install
     - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yyyyello-team:$CIRCLE_SHA1 .
 
 test:
