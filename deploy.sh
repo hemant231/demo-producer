@@ -47,9 +47,11 @@ echo $REVISION
 
 
 push_ecr_image(){
-	echo deploy_cluster_function
+	echo push_ecr_image
 	eval $(aws ecr get-login --region us-east-2)
 	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1
+	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team:latest
+
 }
 
 configure_aws_cli
