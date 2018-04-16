@@ -49,8 +49,8 @@ echo $REVISION
 push_ecr_image(){
 	echo push_ecr_image
 	eval $(aws ecr get-login --region us-east-2)
-	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1
-	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team:latest
+	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team-client-mgmt-repo:$CIRCLE_SHA1
+	docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/yello-team-client-mgmt-repo:latest
 
 }
 
