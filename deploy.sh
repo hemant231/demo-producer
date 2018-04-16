@@ -18,7 +18,7 @@ deploy_cluster() {
     
    
 
-  SERVICES=`aws ecs describe-services --services test-service --cluster test-cluster --region us-east-2 | jq .failures[]`
+  SERVICES=`aws ecs describe-services --services yello-team-client-mgmt-service --cluster test-cluster --region us-east-2 | jq .failures[]`
 REVISION=`aws ecs describe-task-definition --task-definition ${family} --region us-east-2 | jq .taskDefinition.revision`
 
 
@@ -27,17 +27,17 @@ echo $REVISION
 
  if [ "$SERVICES" == "" ]; then
    echo "entered existing service"
-   DESIRED_COUNT=`aws ecs describe-services --services test-service --cluster test-cluster --region us-east-2 | jq .services[].desiredCount`
+   DESIRED_COUNT=`aws ecs describe-services --services yello-team-client-mgmt-service --cluster test-cluster --region us-east-2 | jq .services[].desiredCount`
    echo $DESIRED_COUNT;
    if [ ${DESIRED_COUNT} = "0" ]; then
      DESIRED_COUNT="1"
    else
      DESIRED_COUNT="0"
-   aws ecs update-service --cluster test-cluster --region us-east-2 --service test-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
+   aws ecs update-service --cluster test-cluster --region us-east-2 --service yello-team-client-mgmt-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
     DESIRED_COUNT="1"
    fi
    sleep 20
-   aws ecs update-service --cluster test-cluster --region us-east-2 --service test-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
+   aws ecs update-service --cluster test-cluster --region us-east-2 --service yello-team-client-mgmt-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
  else
    echo "entered new service"
    aws ecs create-service --service-name yello-team-client-mgmt-service --desired-count 1 --task-definition ${family} --cluster test-cluster --region us-east-2
