@@ -12,7 +12,7 @@ configure_aws_cli(){
 
 deploy_cluster() {
     echo deploy_cluster_function
-    family="test-def"
+    family="yello-team-client-mgmt-taskdef"
     
     echo deploy_cluster_function 1
     
@@ -40,7 +40,7 @@ echo $REVISION
    aws ecs update-service --cluster test-cluster --region us-east-2 --service test-service --task-definition ${family}:${REVISION} --desired-count ${DESIRED_COUNT}
  else
    echo "entered new service"
-   aws ecs create-service --service-name test-service --desired-count 1 --task-definition ${family} --cluster test-cluster --region us-east-2
+   aws ecs create-service --service-name yello-team-client-mgmt-service --desired-count 1 --task-definition ${family} --cluster test-cluster --region us-east-2
  fi
  
 }
