@@ -5,13 +5,13 @@ machine:
 dependencies:
   post:
     - mvn install
-    - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1 .
-    - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team:latest .
+    - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team-client-mgmt-repo:$CIRCLE_SHA1 .
+    - docker build -t 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team-client-mgmt-repo:latest .
 
 
 test:
   post:
-    - docker run -d -p 8080:8080 --name yello-team 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team:$CIRCLE_SHA1; sleep 10
+    - docker run -d -p 8081:8081 --name yello-team 463442625423.dkr.ecr.us-east-2.amazonaws.com/yello-team-client-mgmt-repo:$CIRCLE_SHA1; sleep 10
     - chmod +x ./deploy.sh
    
 deployment:
